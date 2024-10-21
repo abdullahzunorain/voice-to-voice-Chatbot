@@ -3,3 +3,4 @@ pyttsx3
 pydub
 gtts
 Groq
+ffmpeg
