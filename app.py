@@ -2,12 +2,11 @@ import os
 import json
 import streamlit as st
 import speech_recognition as sr
-import pyttsx3  # for converting text to speech
-from gtts import gTTS  # another option for text-to-speech
-from groq import Groq
+from gtts import gTTS  # Google Text-to-Speech
 from pydub import AudioSegment
 from pydub.playback import play
 from io import BytesIO
+from groq import Groq
 
 # Streamlit page configuration
 st.set_page_config(
@@ -19,24 +18,27 @@ st.set_page_config(
 # Initialize the speech recognizer
 recognizer = sr.Recognizer()
 
-# Initialize text-to-speech engine
-engine = pyttsx3.init()
-
-# Function to convert text to speech
+# Function to convert text to speech using gTTS
 def text_to_speech(text):
-    # Using pyttsx3 (offline TTS engine)
-    engine.say(text)
-    engine.runAndWait()
+    try:
+        tts = gTTS(text)
+        audio_fp = BytesIO()
+        tts.write_to_fp(audio_fp)
+        audio_fp.seek(0)
 
-    # Alternatively, using Google Text-to-Speech (online TTS engine)
-    # tts = gTTS(text)
-    # tts.save("response.mp3")
-    # st.audio("response.mp3")
+        # Convert the audio to a format compatible with Streamlit's audio player
+        audio = AudioSegment.from_file(audio_fp, format="mp3")
+        play(audio)
+
+        # Optionally, save the speech as an audio file
+        # tts.save("response.mp3")
+        # st.audio("response.mp3")
+    except Exception as e:
+        st.error(f"Error in converting text to speech: {e}")
 
 # Function to convert speech to text
 def speech_to_text(audio_file):
     try:
-        # Load the audio file with SpeechRecognition
         audio_data = sr.AudioFile(audio_file)
         with audio_data as source:
             recognizer.adjust_for_ambient_noise(source)
@@ -126,6 +128,3 @@ if audio_file is not None:
 
         except Exception as e:
             st.error(f"An error occurred: {e}")
-
-# Voice-to-voice chatbot logic completed.
-
