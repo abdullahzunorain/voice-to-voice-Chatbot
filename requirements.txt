@@ -1,6 +1,7 @@
 SpeechRecognition 
 pyttsx3
 pydub
-gtts
 Groq
 ffmpeg
+streamlit
+gtts
