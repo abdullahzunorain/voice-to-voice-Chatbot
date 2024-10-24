@@ -6,3 +6,5 @@ ffmpeg
 streamlit
 gtts
 whisper
+gradio 
+
