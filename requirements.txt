@@ -1,10 +1,4 @@
-SpeechRecognition 
-pyttsx3
-pydub
-Groq
-ffmpeg
-streamlit
-gtts
-whisper
-gradio 
-
+groq
+gtts 
+gradio
+openai-whisper
