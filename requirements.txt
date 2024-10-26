@@ -1,8 +1,6 @@
 whisper
 gTTS
-gradio
 groq
 soundfile
-tempfile
 numpy
-pysoundfile
+streamlit
