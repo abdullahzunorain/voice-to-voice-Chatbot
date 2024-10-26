@@ -1,4 +1,8 @@
-groq
-gtts 
+whisper
+gTTS
 gradio
-openai-whisper
+groq
+soundfile
+tempfile
+numpy
+pysoundfile
