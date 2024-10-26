@@ -119,7 +119,7 @@ st.markdown(
     """
     <style>
     body {
-        background-image: url("https://huggingface.co/spaces/abdullahzunorain/voice-to-voice-Chatbot/resolve/main/BG_1.jpg");
+        background-image: url("https://raw.githubusercontent.com/abdullahzunorain/voice-to-voice-Chatbot/refs/heads/main/image_1.jpg");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
