@@ -1,6 +1,8 @@
 openai-whisper
+streamlit
+soundfile
+
 gTTS
 groq
-soundfile
 numpy
 streamlit
