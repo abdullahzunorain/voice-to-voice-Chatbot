@@ -10,7 +10,12 @@ import torchaudio
 model = whisper.load_model("base")
 
 # Set Groq API Key
-GROQ_API_KEY = "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"
+# GROQ_API_KEY = "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"
+# Set up Groq API client using environment variable
+GROQ_API_TOKEN = os.getenv("GROQ_API")
+if not GROQ_API_TOKEN:
+    st.error("Groq API token is missing. Set 'GROQ_API' in your environment variables.")
+client = Groq(api_key=GROQ_API_TOKEN)
 
 # Initialize Groq client
 client = Groq(api_key=GROQ_API_KEY)
