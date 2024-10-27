@@ -1,9 +1,10 @@
-# Import libraries
 import whisper
 import os
 from gtts import gTTS
 import streamlit as st
 from groq import Groq
+import tempfile
+import torchaudio
 
 # Load Whisper model for transcription
 model = whisper.load_model("base")
@@ -35,8 +36,13 @@ st.title("AI Chatbot with Audio Input and Output")
 uploaded_audio = st.file_uploader("Upload an audio file", type=["wav", "mp3", "m4a"])
 
 if uploaded_audio:
+    # Save the uploaded file temporarily
+    with tempfile.NamedTemporaryFile(delete=False) as temp_audio_file:
+        temp_audio_file.write(uploaded_audio.read())
+        temp_audio_path = temp_audio_file.name
+
     # Step 1: Transcribe the audio using Whisper
-    result = model.transcribe(uploaded_audio)
+    result = model.transcribe(temp_audio_path)
     user_text = result["text"]
     
     # Display transcribed text
@@ -55,3 +61,7 @@ if uploaded_audio:
     audio_file = open(output_audio, "rb")
     audio_bytes = audio_file.read()
     st.audio(audio_bytes, format="audio/mp3")
+
+    # Clean up temporary files
+    os.remove(temp_audio_path)
+    os.remove(output_audio)
