@@ -18,7 +18,7 @@ if not GROQ_API_TOKEN:
 client = Groq(api_key=GROQ_API_TOKEN)
 
 # Initialize Groq client
-client = Groq(api_key=GROQ_API_KEY)
+client = Groq(api_key=GROQ_API_TOKEN)
 
 # CSS styling for a better interface
 st.markdown("""
